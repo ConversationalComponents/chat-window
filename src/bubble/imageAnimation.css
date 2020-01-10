@@ -1,9 +1,0 @@
-.imageAnimation {
-    animation: scale 0.3s ease forwards;
-}
-
-@keyframes scale {
-    100% {
-        transform: scale(1);
-    }
-}
