@@ -1,0 +1,11 @@
+.bubbleAnimation {
+    animation: bubble 0.3s ease forwards;
+}
+@keyframes bubble {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
