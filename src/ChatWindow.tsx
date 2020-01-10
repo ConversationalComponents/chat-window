@@ -12,6 +12,7 @@ import ChatBotContainer from "./containers/ChatBotContainer";
  *     
     content: ChatEntry[]; // array of entries to build body from
     title?: string; // title for the header, if using default header
+    onChange?: (text: string) => void; // to be called on input change if using default footer
     onSubmit?: (text: string) => void; // to be called on user submit if using default footer
     header?: JSX.Element; // header to replace default
     bubble?: (p: ChatBubbleParams) => JSX.Element; // buble rendering function
@@ -23,6 +24,7 @@ export const ChatWindow = (p: {
     content: ChatEntry[];
     title?: string;
     onSubmit?: (text: string) => void;
+    onChange?: (text: string) => void;
     header?: JSX.Element;
     bubble?: (p: ChatBubbleParams) => JSX.Element;
     footer?: JSX.Element;
@@ -56,7 +58,11 @@ export const ChatWindow = (p: {
                 p.footer
             ) : (
                 <FooterInput
-                    {...{onSubmit: p.onSubmit ? p.onSubmit : (t: string) => {}, inputPlaceholder: "Type here"}}
+                    {...{
+                        onChange: p.onChange ? p.onChange : (t: string) => {},
+                        onSubmit: p.onSubmit ? p.onSubmit : (t: string) => {},
+                        inputPlaceholder: "Type here"
+                    }}
                 />
             )}
         </ChatBotContainer>

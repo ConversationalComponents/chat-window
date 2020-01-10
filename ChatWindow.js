@@ -45,5 +45,9 @@ exports.ChatWindow = function (p) {
     return (react_1.default.createElement(ChatBotContainer_1.default, null,
         p.header ? p.header : react_1.default.createElement(Header_1.Header, { title: title || "", extraContent: p.headerAdditionalContent }),
         react_1.default.createElement(ChatBody_1.ChatBody, null, bubbles),
-        p.footer ? (p.footer) : (react_1.default.createElement(FooterInput_1.FooterInput, __assign({}, { onSubmit: p.onSubmit ? p.onSubmit : function (t) { }, inputPlaceholder: "Type here" })))));
+        p.footer ? (p.footer) : (react_1.default.createElement(FooterInput_1.FooterInput, __assign({}, {
+            onChange: p.onChange ? p.onChange : function (t) { },
+            onSubmit: p.onSubmit ? p.onSubmit : function (t) { },
+            inputPlaceholder: "Type here"
+        })))));
 };
