@@ -53,6 +53,7 @@ export const Example = () => {
     }, [content]);
     return (
         <ChatWindow
+            title="Example"
             content={content}
             onSubmit={(text: string) => setContent([...content, makeMessage(true, text, content.length)])}
         />
