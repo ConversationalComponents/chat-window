@@ -63,13 +63,11 @@ export const Example = () => {
 
 ```
 
-An example with custom header, typing animations, copy-pasted from src/lib/Example.tsx:
+An example with custom header, typing animations:
 ```js
 import React, {useState, useEffect} from "react";
-import {ChatEntry} from "../types";
-import {ChatWindow} from "./ChatWindow";
-import {useUserTyping} from "./hooks/useUserTyping";
-import {useBotTyping} from "./hooks/useBotTyping";
+import {ChatEntry} from "coco-chat-window-core/types";
+import {useUserTyping, useBotTyping, ChatWindow} from "coco-chat-window-core";
 
 const botReplies = ["Wow!", "Fascinating, please do go on", "Amazing!", "Really?", "If you say so..."];
 const getBotReply = () => botReplies[Math.floor(Math.random() * botReplies.length)];
