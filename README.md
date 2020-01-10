@@ -5,7 +5,7 @@ Basic chat window functionality
 install with ```npm install coco-chat-window-core```
 
 example:
-```
+```js
 import React from "react";
 import {ChatWindow} from "coco-chat-window-core";
 
@@ -28,7 +28,7 @@ export const Example = () => (
 
 
 An example with fake conversation:
-```
+```js
 
 import React, {useState, useEffect} from "react";
 import {ChatWindow} from "coco-chat-window-core";
