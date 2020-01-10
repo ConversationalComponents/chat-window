@@ -9,7 +9,8 @@ import ChatBotContainer from "./containers/ChatBotContainer";
 /**
  * 
  * @param p {
- *     content: ChatEntry[]; // array of entries to build body from
+ *     
+    content: ChatEntry[]; // array of entries to build body from
     title?: string; // title for the header, if using default header
     onSubmit?: (text: string) => void; // to be called on user submit if using default footer
     header?: JSX.Element; // header to replace default

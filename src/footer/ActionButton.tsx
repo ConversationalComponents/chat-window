@@ -1,7 +1,24 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
-export const ActionButton = ({color, children, invalid, disabled, onTouchStart, onTouchCancel, onTouchEnd}) => {
-    const ref = useRef();
+export const ActionButton = (p: {
+    color?: string;
+    children?: any;
+    invalid: boolean;
+    disabled: boolean;
+    onTouchStart: (event: React.PointerEvent<HTMLButtonElement>) => void;
+    onTouchCancel: (event: React.PointerEvent<HTMLButtonElement>) => void;
+    onTouchEnd: (event: React.PointerEvent<HTMLButtonElement>) => void;
+}) => {
+    const {onTouchStart, onTouchCancel, onTouchEnd} = p;
+
+    const [color, setColor] = useState(p.color);
+    useEffect(() => setColor(p.color), [p.color]);
+    const [invalid, setInvalid] = useState(p.invalid);
+    useEffect(() => setInvalid(p.invalid), [p.invalid]);
+    const [disabled, setDisabled] = useState(p.disabled);
+    useEffect(() => setDisabled(p.disabled), [p.disabled]);
+
+    const ref = useRef<HTMLButtonElement | null>(null);
     useEffect(() => {
         if (!ref.current) return;
         ref.current.oncontextmenu = event => {
@@ -31,6 +48,7 @@ export const ActionButton = ({color, children, invalid, disabled, onTouchStart, 
                 position: "absolute",
                 right: 0,
                 top: 0,
+                // @ts-ignore
                 "&:before": {
                     content: "",
                     position: "absolute",
@@ -43,7 +61,7 @@ export const ActionButton = ({color, children, invalid, disabled, onTouchStart, 
                 }
             }}
             disabled={disabled}>
-            {children}
+            {p.children}
         </button>
     );
 };
