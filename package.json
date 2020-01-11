@@ -1,7 +1,28 @@
 {
     "name": "coco-chat-window-core",
-    "version": "1.2.0",
-    "description": "",
+    "version": "1.2.1",
+    "description": "Customisable chat window component with React and Mobx",
+    "keywords": [
+        "React",
+        "React Component",
+        "MobX",
+        "Chat",
+        "UI",
+        "Chat Window"
+    ],
+    "homepage": "https://github.com/ConversationalComponents/chat-window-core#readme",
+    "bugs": {
+        "url": "https://github.com/ConversationalComponents/chat-window-core/issues"
+    },
+    "licenses": [
+        {
+            "license": "MIT"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ConversationalComponents/chat-window-core.git"
+    },
     "main": "index.js",
     "scripts": {
         "prepare": "tsc && echo 'Finished building NPM package'"

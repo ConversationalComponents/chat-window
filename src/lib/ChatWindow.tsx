@@ -6,29 +6,24 @@ import {FooterInput} from "./footer/FooterInput";
 import {ChatEntry, ChatBubbleParams} from "../types";
 import ChatBotContainer from "./containers/ChatBotContainer";
 
-/**
- * 
- * @param p {
- *     
-    content: ChatEntry[]; // array of entries to build body from
-    title?: string; // title for the header, if using default header
-    onChange?: (text: string) => void; // to be called on input change if using default footer
-    onSubmit?: (text: string) => void; // to be called on user submit if using default footer
-    header?: JSX.Element; // header to replace default
-    bubble?: (p: ChatBubbleParams) => JSX.Element; // buble rendering function
-    footer?: JSX.Element; // footer to replace default
-    headerAdditionalContent?: JSX.Element; // additional header content
-    bubbleExtraParams?: any; // additional params to pass to bubbles}
- */
 export const ChatWindow = (p: {
+    /** array of entries to build bubbles from */
     content: ChatEntry[];
+    /** title for the header, if using default header */
     title?: string;
+    /** to be called on input change if using default footer */
     onSubmit?: (text: string) => void;
+    //** to be called on input submit if using default footer */
     onChange?: (text: string) => void;
+    /** header to replace default */
     header?: JSX.Element;
+    /** buble rendering function - for custom bubbles */
     bubble?: (p: ChatBubbleParams) => JSX.Element;
+    /** footer to replace default */
     footer?: JSX.Element;
+    /** additional header content */
     headerAdditionalContent?: JSX.Element;
+    /** additional params to pass to bubbles */
     bubbleExtraParams?: any;
 }) => {
     const CustomBubble = p.bubble;
