@@ -6,7 +6,6 @@ const ChatBotContainer = (p: {children: any}) => {
             style={{
                 backgroundColor: "#f5f8fb",
                 borderRadius: "10px",
-                boxShadow: "0 12px 24px 0 rgba(0, 0, 0, 0.15)",
                 fontFamily: "sans-serif",
                 overflow: "hidden",
                 position: "relative",
