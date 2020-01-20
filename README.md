@@ -1,4 +1,4 @@
-# chat-window-core
+# chat-window
 
 Basic chat window functionality
 
@@ -7,7 +7,7 @@ install with ```npm install @conversationalcomponents/chat-window```
 example:
 ```js
 import React from "react";
-import {ChatWindow} from "coco-chat-window-core";
+import {ChatWindow} from "@conversationalcomponents/chat-window";
 
 export const Example = () => (
     <ChatWindow
@@ -31,7 +31,7 @@ An example with fake conversation:
 ```js
 
 import React, {useState, useEffect} from "react";
-import {ChatWindow} from "coco-chat-window-core";
+import {ChatWindow} from "@conversationalcomponents/chat-window";
 
 const makeMessage = (isUser: boolean, text: string, id: number) => ({
     isUser,
@@ -63,11 +63,11 @@ export const Example = () => {
 
 ```
 
-An example with custom header, typing animations:
+An example with custom header, typing animations (Typescript):
 ```js
 import React, {useState, useEffect} from "react";
-import {ChatEntry} from "coco-chat-window-core/types";
-import {useUserTyping, useBotTyping, ChatWindow} from "coco-chat-window-core";
+import {useUserTyping, useBotTyping, ChatWindow} from "@conversationalcomponents/chat-window";
+import {ChatEntry} from "@conversationalcomponents/chat-window/types";
 
 const botReplies = ["Wow!", "Fascinating, please do go on", "Amazing!", "Really?", "If you say so..."];
 const getBotReply = () => botReplies[Math.floor(Math.random() * botReplies.length)];

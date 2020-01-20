@@ -1,46 +1,48 @@
 {
-    "name": "coco-chat-window-core",
-    "version": "1.2.1",
-    "description": "Customisable chat window component with React and Mobx",
-    "keywords": [
-        "React",
-        "React Component",
-        "MobX",
-        "Chat",
-        "UI",
-        "Chat Window"
-    ],
-    "homepage": "https://github.com/ConversationalComponents/chat-window-core#readme",
-    "bugs": {
-        "url": "https://github.com/ConversationalComponents/chat-window-core/issues"
-    },
-    "licenses": [
-        {
-            "license": "MIT"
-        }
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ConversationalComponents/chat-window-core.git"
-    },
-    "main": "index.js",
-    "scripts": {
-        "prepare": "tsc && echo 'Finished building NPM package'"
-    },
-    "author": {
-        "name": "Alex Tavor",
-        "email": "alex@a-i.com",
-        "url": "https://www.conversationalcomponents.com/"
-    },
-    "license": "ISC",
-    "types": "index.d.ts",
-    "peerDependencies": {
-        "react": "^15.0.0-0 || ^16.0.0-0"
-    },
-    "devDependencies": {
-        "@types/react": "^16.9.17",
-        "react": "^16.12.0",
-        "react-dom": "^16.12.0",
-        "typescript": "^3.7.4"
+  "name": "@conversationalcomponents/chat-window",
+  "version": "1.2.1",
+  "description": "Customisable chat window component with React and Mobx",
+  "keywords": [
+    "React",
+    "React Component",
+    "MobX",
+    "Chat",
+    "UI",
+    "Chat Window"
+  ],
+  "homepage": "https://github.com/ConversationalComponents/chat-window#readme",
+  "bugs": {
+    "url": "https://github.com/ConversationalComponents/chat-window/issues"
+  },
+  "licenses": [
+    {
+      "license": "MIT"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConversationalComponents/chat-window-core.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "prepare": "tsc && echo 'Finished building NPM package'"
+  },
+  "author": "Alex Tavor <alex@a-i.com> (https://www.conversationalcomponents.com/)",
+  "license": "MIT",
+  "types": "index.d.ts",
+  "peerDependencies": {
+    "react": "^15.0.0-0 || ^16.0.0-0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.17",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "mobx": "^5.15.2"
+  },
+  "directories": {
+    "lib": "lib"
+  }
 }
