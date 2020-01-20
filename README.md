@@ -2,7 +2,7 @@
 
 Basic chat window functionality
 
-install with ```npm install coco-chat-window-core```
+install with ```npm install @conversationalcomponents/chat-window```
 
 example:
 ```js
@@ -110,4 +110,54 @@ export const Example = () => {
     );
 };
 
+```
+
+An example with typing animations that echoes user's input back:
+
+```js
+import React, {useState, useEffect} from "react";
+import {ChatEntry} from "@conversationalcomponents/chat-window/types";
+import {useUserTyping, useBotTyping, ChatWindow} from "@conversationalcomponents/chat-window";
+
+const userAvatar = "https://img.icons8.com/color/search/0";
+const botAvatar = "https://img.icons8.com/color/search/1";
+
+export const Example = () => {
+    const [content, setContent] = useState<ChatEntry[]>([]);
+    const [lastInputValue, setLastInputValue] = useState("");
+    const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState("");
+    const [nextBotReply, setNextBotReply] = useState("");
+
+    useEffect(() => {
+        const lastEntry = content.length && content[content.length - 1];
+        if (!lastEntry || lastEntry.isUser) return;
+        setNextBotReply(lastInputValue);
+        setLastInputValue("");
+    }, [content]);
+
+    useEffect(() => {
+        lastInputValue && setLastUnsubmittedInput("");
+    }, [lastInputValue]);
+
+    useUserTyping(content, setContent, lastUnsubmittedInput, lastInputValue, userAvatar);
+    const isBotDoneTyping = useBotTyping(content, setContent, lastInputValue, botAvatar);
+
+    useEffect(() => {
+        if (!isBotDoneTyping || !nextBotReply) return;
+        const lastEntry = content.length && content[content.length - 1];
+        if (!lastEntry || lastEntry.isUser) return;
+        lastEntry.message = nextBotReply;
+        lastEntry.isLoading = false;
+        setNextBotReply("");
+    }, [isBotDoneTyping]);
+
+    return (
+        <ChatWindow
+            headerAdditionalContent={<div style={{flex: 1, display: "flex", justifyContent: "center"}}>HEADER</div>}
+            content={content}
+            onChange={(text: string) => setLastUnsubmittedInput(text)}
+            onSubmit={(text: string) => setLastInputValue(text)}
+        />
+    );
+};
 ```
