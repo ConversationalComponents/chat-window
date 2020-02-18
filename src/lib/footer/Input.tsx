@@ -43,6 +43,7 @@ const Input = (p: {
                 border: 0,
                 borderRadius: 0,
                 height: "22px",
+                minHeight: "22px",
                 borderBottomLeftRadius: "10px",
                 borderBottomRightRadius: "10px",
                 boxShadow: "none",
