@@ -27,12 +27,12 @@ const Input = (p: {
 
     return (
         <TextareaAutosize
-            contentEditable="true"
             style={{
                 border: 0,
                 borderRadius: 0,
                 borderBottomLeftRadius: "10px",
                 borderBottomRightRadius: "10px",
+                height: "22px",
                 minHeight: "22px",
                 maxHeight: "180px",
                 boxShadow: "none",

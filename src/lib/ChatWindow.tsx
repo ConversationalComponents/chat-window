@@ -4,7 +4,7 @@ import {ChatBody} from "./containers/ChatBody";
 import {ChatBubble} from "./bubble/ChatBubble";
 import {ChatEntry, ChatBubbleParams} from "../types";
 import ChatBotContainer from "./containers/ChatBotContainer";
-import {FooterInput} from "./footer/FooterInput";
+import {FooterInput} from "..";
 
 export const ChatWindow = (p: {
     /** array of entries to build bubbles from */
