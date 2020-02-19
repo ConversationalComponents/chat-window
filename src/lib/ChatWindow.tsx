@@ -2,9 +2,9 @@ import React, {useState, ReactNode, useEffect} from "react";
 import {Header} from "./header/Header";
 import {ChatBody} from "./containers/ChatBody";
 import {ChatBubble} from "./bubble/ChatBubble";
-import {FooterInput} from "./footer/FooterInput";
 import {ChatEntry, ChatBubbleParams} from "../types";
 import ChatBotContainer from "./containers/ChatBotContainer";
+import {FooterInput} from "./footer/FooterInput";
 
 export const ChatWindow = (p: {
     /** array of entries to build bubbles from */

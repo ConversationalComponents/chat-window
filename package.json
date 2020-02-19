@@ -40,7 +40,8 @@
         "typescript": "^3.7.5"
     },
     "dependencies": {
-        "mobx": "^5.15.4"
+        "mobx": "^5.15.4",
+        "react-autosize-textarea": "^7.0.0"
     },
     "directories": {
         "lib": "lib"

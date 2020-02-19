@@ -1,6 +1,5 @@
 import React, {useRef, useEffect} from "react";
-
-const MAX_HEIGHT = 180;
+import TextareaAutosize from "react-autosize-textarea";
 
 const Input = (p: {
     inputInvalid: boolean;
@@ -15,16 +14,6 @@ const Input = (p: {
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
-        if (!inputRef.current) return;
-        inputRef.current.style.height = "22px";
-        inputRef.current.oninput = () => {
-            if (!inputRef.current) return;
-            inputRef.current.style.height = "22px";
-            inputRef.current.style.height = Math.min(inputRef.current.scrollHeight, MAX_HEIGHT) + "px";
-        };
-    }, [inputRef.current]);
-
-    useEffect(() => {
         if (!disabled) {
             inputRef.current && inputRef.current.focus();
         } else {
@@ -37,15 +26,15 @@ const Input = (p: {
     }, [p.isRefocusing]);
 
     return (
-        <textarea
-            rows={1}
+        <TextareaAutosize
+            contentEditable="true"
             style={{
                 border: 0,
                 borderRadius: 0,
-                height: "22px",
-                minHeight: "22px",
                 borderBottomLeftRadius: "10px",
                 borderBottomRightRadius: "10px",
+                minHeight: "22px",
+                maxHeight: "180px",
                 boxShadow: "none",
                 boxSizing: "border-box",
                 fontSize: "16px",
@@ -64,11 +53,10 @@ const Input = (p: {
             }}
             ref={inputRef}
             value={value}
-            onChange={onChange}
-            onKeyPress={onKeyPress}
-            type="textarea"
             disabled={disabled}
             placeholder={inputInvalid ? "" : inputPlaceholder}
+            onKeyPress={onKeyPress}
+            onChange={onChange}
         />
     );
 };
