@@ -1,7 +1,7 @@
 import React, {useRef, useEffect} from "react";
 import TextareaAutosize from "react-autosize-textarea";
 
-const Input = (p: {
+type Input = {
     inputInvalid: boolean;
     inputPlaceholder: string;
     onKeyPress: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
@@ -9,7 +9,9 @@ const Input = (p: {
     disabled: boolean;
     value: string;
     isRefocusing: boolean;
-}) => {
+}
+
+const Input = (p: Input) => {
     const {inputInvalid, inputPlaceholder, onKeyPress, onChange, disabled, value} = p;
     const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -28,11 +30,10 @@ const Input = (p: {
     return (
         <TextareaAutosize
             style={{
-                border: 0,
                 borderRadius: 0,
                 borderBottomLeftRadius: "10px",
                 borderBottomRightRadius: "10px",
-                height: "22px",
+                height: "56px",
                 minHeight: "22px",
                 maxHeight: "180px",
                 boxShadow: "none",
