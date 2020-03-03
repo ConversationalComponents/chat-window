@@ -16,8 +16,7 @@ export const ChatBody = (p: { children?: ReactNode }) => {
       ref={container}
       style={{
         flex: 1,
-        overflowY: "auto",
-        height:"cacl(100% -122px)"
+        overflowY: "auto"
       }}
     >
       {p.children}
