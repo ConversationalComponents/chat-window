@@ -11,6 +11,8 @@ export const FooterInput = (p: {
     actionButton?: JSX.Element;
     minRows?: number;
     maxRows?: number;
+    maxHeight?: number;
+    minHeight?: number;
 }) => {
     const defaultInvalidate = (value: string) => false;
 
@@ -84,7 +86,9 @@ export const FooterInput = (p: {
                     value,
                     disabled,
                     minRows: p.minRows,
-                    maxRows: p.maxRows
+                    maxRows: p.maxRows,
+                    minHeight: p.minHeight,
+                    maxHeight: p.maxHeight
                 }}
             />
             {actionButton}

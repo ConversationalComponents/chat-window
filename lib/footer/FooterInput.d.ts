@@ -8,4 +8,6 @@ export declare const FooterInput: (p: {
     actionButton?: JSX.Element | undefined;
     minRows?: number | undefined;
     maxRows?: number | undefined;
+    maxHeight?: number | undefined;
+    minHeight?: number | undefined;
 }) => JSX.Element;

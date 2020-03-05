@@ -12,6 +12,8 @@ type Input = {
     isRefocusing: boolean;
     minRows?: number;
     maxRows?: number;
+    maxHeight?: number;
+    minHeight?: number;
 };
 
 const Input = (p: Input) => {
@@ -39,9 +41,9 @@ const Input = (p: Input) => {
                 borderBottomLeftRadius: "10px",
                 borderBottomRightRadius: "10px",
                 border: "none",
-                minHeight: "22px",
-                maxHeight: "180px",
-                height: "56px",
+                minHeight: p.minHeight || "56px",
+                maxHeight: p.maxHeight || "180px",
+                height: p.minHeight || "56px",
                 boxShadow: "none",
                 boxSizing: "border-box",
                 fontSize: "16px",

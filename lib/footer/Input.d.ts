@@ -9,6 +9,8 @@ declare type Input = {
     isRefocusing: boolean;
     minRows?: number;
     maxRows?: number;
+    maxHeight?: number;
+    minHeight?: number;
 };
 declare const Input: (p: Input) => JSX.Element;
 export default Input;
