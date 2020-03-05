@@ -6,4 +6,6 @@ export declare const FooterInput: (p: {
     inputPlaceholder: string;
     disabled?: boolean | undefined;
     actionButton?: JSX.Element | undefined;
+    minRows?: number | undefined;
+    maxRows?: number | undefined;
 }) => JSX.Element;

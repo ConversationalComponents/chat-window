@@ -10,6 +10,8 @@ type Input = {
     disabled: boolean;
     value: string;
     isRefocusing: boolean;
+    minRows?: number;
+    maxRows?: number;
 };
 
 const Input = (p: Input) => {
@@ -30,7 +32,8 @@ const Input = (p: Input) => {
 
     return (
         <TextareaAutosize
-            rows={1}
+            rows={p.minRows || 1}
+            maxRows={p.maxRows || 4}
             style={{
                 borderRadius: 0,
                 borderBottomLeftRadius: "10px",
