@@ -78,6 +78,7 @@ const Input = (p: Input) => {
                     spellCheck="true" 
                     id="coco_chat_window_textarea"            
                 />
+
     );
 };
 
