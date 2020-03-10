@@ -18,6 +18,8 @@ export const ChatWindow = (p: {
   /** header to replace default */
   header?: JSX.Element;
   /** buble rendering function - for custom bubbles */
+  onFocus?: (e:any) => void;
+
   bubble?: (p: ChatBubbleParams) => JSX.Element;
   /** footer to replace default */
   footer?: JSX.Element;
@@ -28,12 +30,14 @@ export const ChatWindow = (p: {
 }) => {
   const CustomBubble = p.bubble;
   const [content, setContent] = useState(p.content);
-  useEffect(() => setContent(p.content), [p.content]);
-  const [title, setTitle] = useState(p.title);
-  useEffect(() => setTitle(p.title), [p.title]);
   const [bubbles, setBubbles] = useState<ReactNode[]>([]);
+  const [title, setTitle] = useState(p.title);
+
+  useEffect(() => setContent(p.content), [p.content]);
+  useEffect(() => setTitle(p.title), [p.title]);
   useEffect(() => {
     const newBubbles = [] as JSX.Element[];
+
     content.forEach((c, i) => {
       const bubble = CustomBubble ? (
         <CustomBubble
@@ -48,7 +52,9 @@ export const ChatWindow = (p: {
       );
       newBubbles.push(bubble);
     });
+
     setBubbles(newBubbles);
+
   }, [content]);
 
   return (
@@ -58,7 +64,7 @@ export const ChatWindow = (p: {
       ) : (
         <Header title={title || ""} extraContent={p.headerAdditionalContent} />
       )}
-      <ChatBody>{bubbles}</ChatBody>
+      <ChatBody {...{onFocus: p.onFocus ? p.onFocus :   undefined}}>{bubbles}</ChatBody>
       {p.footer ? (
         p.footer
       ) : (
@@ -66,7 +72,8 @@ export const ChatWindow = (p: {
           {...{
             onChange: p.onChange ? p.onChange : (t: string) => {},
             onSubmit: p.onSubmit ? p.onSubmit : (t: string) => {},
-            inputPlaceholder: "Type here"
+            onFocus : p.onFocus ? p.onFocus :   undefined,
+            inputPlaceholder: "Type here ..."
           }}
         />
       )}

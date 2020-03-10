@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, ReactNode } from "react";
+import React, { useEffect, useRef, ReactNode, useState } from "react";
 
-export const ChatBody = (p: { children?: ReactNode }) => {
+export const ChatBody = (p: { children?: ReactNode}) => {
   const container = useRef<HTMLDivElement | null>(null);
+  const [height,setHeight] = useState()
+
   useEffect(() => {
     container &&
       container.current &&
@@ -9,15 +11,30 @@ export const ChatBody = (p: { children?: ReactNode }) => {
         top: container.current.scrollHeight,
         behavior: "smooth"
       });
-  }, [p.children]);
+  });
+
+  useEffect(() => {
+    const textArea = document.querySelector("#coco_chat_window_textarea");
+    const header = 56;
+
+   if(textArea?.clientHeight){
+
+      setHeight(window.innerHeight -  textArea?.clientHeight + header)
+    }
+  })
 
   return (
     <div
       ref={container}
       style={{
         flex: 1,
-        overflowY: "auto"
+        overflowY: "auto",
+        scrollbarWidth:"thin",
+        position:"relative",
+        height:`${height}px`,
+        paddingTop : "12px"
       }}
+      id="coco_chat_window_body"
     >
       {p.children}
     </div>

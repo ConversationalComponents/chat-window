@@ -2,9 +2,10 @@ import React, {useState, useEffect, useCallback} from "react";
 import Input from "./Input";
 import {ConfirmTextButton} from "./ConfirmTextButton";
 
-export const FooterInput = (p: {
+type FooterInput = {
     onSubmit: (value: string) => void;
     onChange?: (value: string) => void;
+    onFocus?: (e:React.FocusEvent) => void;
     invalidate?: (value: string) => boolean;
     inputPlaceholder: string;
     disabled?: boolean;
@@ -13,7 +14,9 @@ export const FooterInput = (p: {
     maxRows?: number;
     maxHeight?: number;
     minHeight?: number;
-}) => {
+}
+
+export const FooterInput = (p: FooterInput) => {
     const defaultInvalidate = (value: string) => false;
 
     const validate = (value: string) => {
@@ -25,7 +28,7 @@ export const FooterInput = (p: {
     const [inputPlaceholder, setInputPlaceholder] = useState(p.inputPlaceholder);
     const [value, setValue] = useState("");
     const [disabled, setDisabled] = useState(!!p.disabled);
-    const [isRefocusing, setisRefocusing] = useState(false);
+    const [isRefocusing, setIsRefocusing] = useState(false);
 
     useEffect(() => {
         p.onChange && p.onChange(value);
@@ -46,20 +49,32 @@ export const FooterInput = (p: {
     const onSubmit = (value: string) => {
         setValue("");
         p.onSubmit(value);
-        setisRefocusing(true);
+        setIsRefocusing(true);                        
     };
 
+    const onFocus = (e:React.FocusEvent) => {
+       return p.onFocus ? p.onFocus(e) : ""
+    }
+
     const [actionButton, setActionButton] = useState(p.actionButton || <ConfirmTextButton onSubmit={onClickSubmit} />);
+
     useEffect(() => {
         setActionButton(p.actionButton || <ConfirmTextButton onSubmit={onClickSubmit} />);
     }, [p.actionButton, value]);
 
+
     const onKeyPress = (event: React.KeyboardEvent<any>) => {
-        const isInvalid = validate(event.currentTarget.value);
-        if (isInvalid) return;
-        const key = event.key;
-        if (key === "Enter") {
-            onSubmit(event.currentTarget.value);
+        const {value} =  event.currentTarget   
+        const {key} = event           
+        const isInvalid = validate(value);
+
+        setIsRefocusing(false);         
+
+        if (!isInvalid) {
+        
+            if (key === "Enter") {
+                if(value.length !== 0) onSubmit(value);
+            }
         }
     };
 
@@ -70,10 +85,9 @@ export const FooterInput = (p: {
     return (
         <div
             style={{
-                position: "relative",
                 display: "flex",
                 width: "100%",
-                height: "fit-content",
+                position:"relative",
                 borderTop: "1px solid #eee"
             }}>
             <Input
@@ -83,6 +97,7 @@ export const FooterInput = (p: {
                     inputPlaceholder,
                     onKeyPress,
                     onChange,
+                    onFocus,
                     value,
                     disabled,
                     minRows: p.minRows,
@@ -91,7 +106,9 @@ export const FooterInput = (p: {
                     maxHeight: p.maxHeight
                 }}
             />
-            {actionButton}
+            <div style={{position:"absolute", right : 0,height:"100%"}}>
+                   {actionButton}
+            </div>
         </div>
     );
 };

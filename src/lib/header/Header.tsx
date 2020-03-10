@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
 import {HeaderParams} from "../../types";
+import {isMobile} from 'react-device-detect'
 
 export const Header = (p: HeaderParams) => {
     const [title, setTitle] = useState(p.title);
+
     useEffect(() => {
         setTitle(p.title);
     }, [p.title]);
@@ -16,6 +18,7 @@ export const Header = (p: HeaderParams) => {
                 display: "flex",
                 fill: "#fff",
                 height: "56px",
+                zIndex:99999,
                 justifyContent: "space-between",
                 padding: "0 10px"
             }}>

@@ -1,12 +1,13 @@
-import React, {useRef, useEffect} from "react";
+import React, {useRef, useEffect,useState} from "react";
+
 // @ts-ignore
-import TextareaAutosize from "react-autosize-textarea";
 
 type Input = {
     inputInvalid: boolean;
     inputPlaceholder: string;
     onKeyPress: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
     onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onFocus: (event:React.FocusEvent<HTMLTextAreaElement>) => void;
     disabled: boolean;
     value: string;
     isRefocusing: boolean;
@@ -17,56 +18,66 @@ type Input = {
 };
 
 const Input = (p: Input) => {
-    const {inputInvalid, inputPlaceholder, onKeyPress, onChange, disabled, value} = p;
-    const inputRef = useRef<HTMLTextAreaElement>(null);
+
+    const {inputInvalid, inputPlaceholder, onKeyPress, onChange, disabled, value,isRefocusing,onFocus} = p;
+
+    const textAreaRef = useRef<any>()
+    const [height, setHeight] = useState("56");
+
 
     useEffect(() => {
-        if (!disabled) {
-            inputRef.current && inputRef.current.focus();
-        } else {
-            inputRef.current && inputRef.current.blur();
+
+        setHeight(textAreaRef.current.scrollHeight)
+
+    },[textAreaRef?.current?.scrollHeight])
+
+    
+    useEffect(() => {
+
+        if(isRefocusing) {
+
+            setHeight("56");
+            textAreaRef.current.focus();
+
         }
-    }, [disabled]);
 
-    useEffect(() => {
-        p.isRefocusing && inputRef.current && inputRef.current.focus();
-    }, [p.isRefocusing]);
+    },[isRefocusing])
 
     return (
-        <TextareaAutosize
-            rows={p.minRows || 1}
-            maxRows={p.maxRows || 4}
+        <textarea    
             style={{
-                borderRadius: 0,
-                borderBottomLeftRadius: "10px",
-                borderBottomRightRadius: "10px",
-                border: "none",
-                minHeight: `${p.minHeight}px` || "56px",
-                maxHeight: `${p.maxHeight}px` || "180px",
-                height: `${p.minHeight}px` || "56px",
-                boxShadow: "none",
-                boxSizing: "border-box",
-                fontSize: "16px",
-                fontFamily: "sans-serif",
-                opacity: disabled && !inputInvalid ? 0.5 : 1,
-                outline: "none",
-                flex: 1,
-                padding: "16px 10px",
-                overflow: "hidden",
-                WebkitAppearance: "none",
-                resize: "none",
-                // @ts-ignore
-                "&:disabled": {
-                    background: "#fff"
-                }
-            }}
-            ref={inputRef}
-            value={value}
-            disabled={disabled}
-            placeholder={inputInvalid ? "" : inputPlaceholder}
-            onKeyPress={onKeyPress}
-            onChange={onChange}
-        />
+                    borderBottomLeftRadius: "10px",
+                    borderBottomRightRadius: "10px",
+                    width:"100%",
+                    border: "none",
+                    boxShadow: "none",
+                    boxSizing: "border-box",
+                    fontSize: "16px",
+                    padding:"18px",
+                    paddingRight:"55px",
+                    height:`${height}px`,
+                    lineHeight:"18px",
+                    fontFamily: "sans-serif",
+                    opacity: disabled && !inputInvalid ? 0.5 : 1,
+                    outline: "none",
+                    overflow: "hidden",
+                    resize: "none",
+                    // @ts-ignore
+                    "&:disabled": {
+                        background: "#fff"
+                    }
+                }}
+                    ref={textAreaRef}
+                    value={value}
+                    disabled={disabled}
+                    placeholder={inputInvalid ? "" : inputPlaceholder}
+                    onKeyPress={onKeyPress}
+                    onChange={onChange} 
+                    onFocus={onFocus}
+                    autoFocus={false}
+                    spellCheck="true" 
+                    id="coco_chat_window_textarea"            
+                />
     );
 };
 
