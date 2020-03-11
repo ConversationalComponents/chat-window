@@ -56,11 +56,13 @@ const Input = (p: Input) => {
                     padding:"18px",
                     paddingRight:"55px",
                     height:`${height}px`,
+                    maxHeight:"110px",
                     lineHeight:"18px",
                     fontFamily: "sans-serif",
                     opacity: disabled && !inputInvalid ? 0.5 : 1,
                     outline: "none",
-                    overflow: "hidden",
+                    overflow: "auto",
+                    scrollbarWidth:"thin",
                     resize: "none",
                     // @ts-ignore
                     "&:disabled": {
