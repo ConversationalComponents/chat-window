@@ -6,6 +6,7 @@ type FooterInput = {
     onSubmit: (value: string) => void;
     onChange?: (value: string) => void;
     onFocus?: (e:React.FocusEvent) => void;
+    onBlur?: () => void;
     invalidate?: (value: string) => boolean;
     inputPlaceholder: string;
     disabled?: boolean;
@@ -24,91 +25,100 @@ export const FooterInput = (p: FooterInput) => {
         setIsInputInvalid(isInvalid);
         return isInvalid;
     };
+
     const [inputInvalid, setIsInputInvalid] = useState<boolean>(false);
     const [inputPlaceholder, setInputPlaceholder] = useState(p.inputPlaceholder);
     const [value, setValue] = useState("");
     const [disabled, setDisabled] = useState(!!p.disabled);
-    const [isRefocusing, setIsRefocusing] = useState(false);
 
     useEffect(() => {
-        p.onChange && p.onChange(value);
-    }, [value]);
 
-    useEffect(() => {
         setDisabled(!!p.disabled);
+
     }, [p.disabled]);
 
     useEffect(() => {
+
         setInputPlaceholder(p.inputPlaceholder);
+
     }, [p.inputPlaceholder]);
 
-    const onClickSubmit = () => {
-        value && onSubmit(value);
-    };
 
-    const onSubmit = (value: string) => {
+    // onSubmit hanlder
+    const onSubmitHandler = (e:React.FormEvent) => {
+
+        e.preventDefault();
+        p.onSubmit(value); 
         setValue("");
-        p.onSubmit(value);
-        setIsRefocusing(true);                        
+
     };
 
-    const onFocus = (e:React.FocusEvent) => {
-       return p.onFocus ? p.onFocus(e) : ""
+    // onFocus handler
+    const onFocusHandler = (e:React.FocusEvent) => {
+
+        return p.onFocus ? p.onFocus(e) : ""
+
     }
 
-    const [actionButton, setActionButton] = useState(p.actionButton || <ConfirmTextButton onSubmit={onClickSubmit} />);
+    // onBlur handler
+    const onBlurHandler = () => {
 
-    useEffect(() => {
-        setActionButton(p.actionButton || <ConfirmTextButton onSubmit={onClickSubmit} />);
-    }, [p.actionButton, value]);
+        return p.onBlur ? p.onBlur() : ""
 
+    }
 
+    // onChange handler
+    const onChangeHandler = (event: any) => {
+        const {value} = event.target
+
+        p.onChange && p.onChange(value);
+        setValue(value);
+
+    }
+
+    // onKeyPress Enter submit handler && Enter + shiftKey to create new line
     const onKeyPress = (event: React.KeyboardEvent<any>) => {
-        const {value} =  event.currentTarget   
-        const {key} = event           
-        const isInvalid = validate(value);
 
-        setIsRefocusing(false);         
-
-        if (!isInvalid) {
-        
-            if (key === "Enter") {
-                if(value.length !== 0) onSubmit(value);
-            }
+        if(event.which === 13 && !event.shiftKey){
+            event.preventDefault();
+            p.onSubmit(value)
+            setValue("")
         }
+
     };
 
-    const onChange = useCallback((event: React.ChangeEvent<any>) => {
-        setValue(event.currentTarget.value);
-    }, []);
+    // set action button
+    const [actionButton, setActionButton] = useState(p.actionButton || <ConfirmTextButton/>);
+
+    useEffect(() => {
+
+        setActionButton(p.actionButton || <ConfirmTextButton/>);
+        
+    }, [p.actionButton, value]);
 
     return (
-        <div
-            style={{
-                display: "flex",
-                width: "100%",
-                position:"relative",
-                borderTop: "1px solid #eee"
-            }}>
-            <Input
-                {...{
-                    isRefocusing,
-                    inputInvalid,
-                    inputPlaceholder,
-                    onKeyPress,
-                    onChange,
-                    onFocus,
-                    value,
-                    disabled,
-                    minRows: p.minRows,
-                    maxRows: p.maxRows,
-                    minHeight: p.minHeight,
-                    maxHeight: p.maxHeight
-                }}
-            />
-            <div style={{position:"absolute", right : 0,height:"100%"}}>
-                   {actionButton}
-            </div>
-        </div>
+        <form onSubmit={onSubmitHandler} style={{width:"100%", display: "flex",position:"relative",borderTop: "1px solid #eee"}}>
+
+                    <Input
+                        {...{
+                            inputInvalid,
+                            inputPlaceholder,
+                            onChangeHandler,
+                            onFocusHandler,
+                            onKeyPress,
+                            onBlurHandler,
+                            value,
+                            disabled,
+                            minRows: p.minRows,
+                            maxRows: p.maxRows,
+                            minHeight: p.minHeight,
+                            maxHeight: p.maxHeight
+                        }}
+                    />  
+                    <div style={{position:"absolute", right : 0,height:"100%"}}>
+                            {actionButton}
+                    </div>
+        </form>
+        
     );
 };

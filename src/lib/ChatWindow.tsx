@@ -7,6 +7,10 @@ import ChatBotContainer from "./containers/ChatBotContainer";
 import { FooterInput } from "./footer/FooterInput";
 
 export const ChatWindow = (p: {
+
+  onBlur? : () => void;
+
+  headerHeight? : number;
   /** array of entries to build bubbles from */
   content: ChatEntry[];
   /** title for the header, if using default header */
@@ -27,6 +31,7 @@ export const ChatWindow = (p: {
   headerAdditionalContent?: JSX.Element;
   /** additional params to pass to bubbles */
   bubbleExtraParams?: any;
+
 }) => {
   const CustomBubble = p.bubble;
   const [content, setContent] = useState(p.content);
@@ -62,9 +67,9 @@ export const ChatWindow = (p: {
       {p.header ? (
         p.header
       ) : (
-        <Header title={title || ""} extraContent={p.headerAdditionalContent} />
+        <Header title={title || ""} extraContent={p.headerAdditionalContent} height={p.headerHeight || 56} />
       )}
-      <ChatBody {...{onFocus: p.onFocus ? p.onFocus :   undefined}}>{bubbles}</ChatBody>
+      <ChatBody>{bubbles}</ChatBody>
       {p.footer ? (
         p.footer
       ) : (
@@ -73,6 +78,7 @@ export const ChatWindow = (p: {
             onChange: p.onChange ? p.onChange : (t: string) => {},
             onSubmit: p.onSubmit ? p.onSubmit : (t: string) => {},
             onFocus : p.onFocus ? p.onFocus :   undefined,
+            onBlur : p.onBlur ? p.onBlur :   undefined,
             inputPlaceholder: "Type here ..."
           }}
         />

@@ -1,47 +1,40 @@
 import React, {useRef, useEffect,useState} from "react";
 
 // @ts-ignore
-
 type Input = {
     inputInvalid: boolean;
     inputPlaceholder: string;
-    onKeyPress: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    onFocus: (event:React.FocusEvent<HTMLTextAreaElement>) => void;
+    onKeyPress?: (event: any) => void;
+    onChangeHandler: (event: React.ChangeEvent) => void;
+    onFocusHandler: (event:React.FocusEvent) => void;
+    onBlurHandler: (event:React.FormEvent) => void;
     disabled: boolean;
     value: string;
-    isRefocusing: boolean;
     minRows?: number;
     maxRows?: number;
     maxHeight?: number;
     minHeight?: number;
+    padding?: string
 };
 
 const Input = (p: Input) => {
 
-    const {inputInvalid, inputPlaceholder, onKeyPress, onChange, disabled, value,isRefocusing,onFocus} = p;
+    const {inputInvalid, inputPlaceholder,onKeyPress, onChangeHandler, disabled, value,onFocusHandler,onBlurHandler} = p;
 
     const textAreaRef = useRef<any>()
-    const [height, setHeight] = useState("56");
+    const [height, setHeight] = useState(p.minHeight || 56);
 
 
     useEffect(() => {
 
-        setHeight(textAreaRef.current.scrollHeight)
+        setHeight(textAreaRef?.current.scrollHeight)
 
-    },[textAreaRef?.current?.scrollHeight])
+        if(value === ""){
 
-    
-    useEffect(() => {
-
-        if(isRefocusing) {
-
-            setHeight("56");
-            textAreaRef.current.focus();
-
+            setHeight(p.minHeight || 56)
         }
 
-    },[isRefocusing])
+    },[value])
 
     return (
         <textarea    
@@ -53,16 +46,16 @@ const Input = (p: Input) => {
                     boxShadow: "none",
                     boxSizing: "border-box",
                     fontSize: "16px",
-                    padding:"18px",
+                    padding:`${p.padding || 18}px`,
                     paddingRight:"55px",
                     height:`${height}px`,
-                    maxHeight:"110px",
+                    maxHeight:`${p.maxHeight || 110}px`,
                     lineHeight:"18px",
                     fontFamily: "sans-serif",
+                    scrollbarWidth:"thin",
                     opacity: disabled && !inputInvalid ? 0.5 : 1,
                     outline: "none",
                     overflow: "auto",
-                    scrollbarWidth:"thin",
                     resize: "none",
                     // @ts-ignore
                     "&:disabled": {
@@ -70,13 +63,17 @@ const Input = (p: Input) => {
                     }
                 }}
                     ref={textAreaRef}
+                    rows={1}
                     value={value}
                     disabled={disabled}
                     placeholder={inputInvalid ? "" : inputPlaceholder}
                     onKeyPress={onKeyPress}
-                    onChange={onChange} 
-                    onFocus={onFocus}
+                    onChange={onChangeHandler} 
+                    onFocus={onFocusHandler}
+                    onBlur={onBlurHandler}
                     autoFocus={false}
+                    wrap="true"
+                    autoComplete="false"
                     spellCheck="true" 
                     id="coco_chat_window_textarea"            
                 />

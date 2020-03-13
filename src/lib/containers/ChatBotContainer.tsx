@@ -1,6 +1,8 @@
 import React from "react";
 
 const ChatBotContainer = (p: { children: any }) => {
+
+
   return (
     <div
       style={{
@@ -9,9 +11,9 @@ const ChatBotContainer = (p: { children: any }) => {
         fontFamily: "sans-serif",
         overflow: "hidden",
         position: "relative",
-        bottom: "initial",
-        top: "initial",
-        right: "initial",
+        bottom: "0 !important",
+        top: "initial !important",
+        right: "0 !important",
         left: "initial",
         zIndex: 999,
         transform: "scale(1)",

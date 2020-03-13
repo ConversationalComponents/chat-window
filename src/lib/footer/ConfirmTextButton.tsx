@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {ActionButton} from "./ActionButton";
 
-export const ConfirmTextButton = (p: {onSubmit: () => void; disabled?: boolean; inputInvalid?: boolean}) => {
+export const ConfirmTextButton = (p: {onSubmit?: () => void; disabled?: boolean; inputInvalid?: boolean}) => {
     const [inputInvalid, setInputInvalid] = useState(!!p.inputInvalid);
     const [disabled, setDisabled] = useState(!!p.disabled);
 
@@ -13,7 +13,7 @@ export const ConfirmTextButton = (p: {onSubmit: () => void; disabled?: boolean; 
     const onTouchCancel = () => {};
 
     const onTouchEnd = () => {
-        p.onSubmit();
+       return p.onSubmit ? p.onSubmit(): ""
     };
 
     return (

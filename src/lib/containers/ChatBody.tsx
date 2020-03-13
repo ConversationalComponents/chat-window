@@ -20,7 +20,7 @@ export const ChatBody = (p: { children?: ReactNode}) => {
         overflowY: "auto",
         scrollbarWidth:"thin",
         position:"relative",
-        height:"auto",
+        height:`auto`,
         paddingTop : "12px"
       }}
       id="coco_chat_window_body"

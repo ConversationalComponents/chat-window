@@ -28,12 +28,14 @@ export const ActionButton = (p: {
             return false;
         };
     }, [ref.current]);
+    
     return (
         <button
             ref={ref}
             onPointerDown={onTouchStart}
             onPointerOut={onTouchCancel}
             onPointerUp={onTouchEnd}
+            type="submit"
             style={{
                 pointerEvents: disabled ? "none" : "all",
                 backgroundColor: "transparent",
