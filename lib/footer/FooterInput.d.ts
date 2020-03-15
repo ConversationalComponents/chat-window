@@ -1,13 +1,17 @@
-/// <reference types="react" />
-export declare const FooterInput: (p: {
+import React from "react";
+declare type FooterInput = {
     onSubmit: (value: string) => void;
-    onChange?: ((value: string) => void) | undefined;
-    invalidate?: ((value: string) => boolean) | undefined;
+    onChange?: (value: string) => void;
+    onFocus?: (e: React.FocusEvent) => void;
+    onBlur?: () => void;
+    invalidate?: (value: string) => boolean;
     inputPlaceholder: string;
-    disabled?: boolean | undefined;
-    actionButton?: JSX.Element | undefined;
-    minRows?: number | undefined;
-    maxRows?: number | undefined;
-    maxHeight?: number | undefined;
-    minHeight?: number | undefined;
-}) => JSX.Element;
+    disabled?: boolean;
+    actionButton?: JSX.Element;
+    minRows?: number;
+    maxRows?: number;
+    maxHeight?: number;
+    minHeight?: number;
+};
+export declare const FooterInput: (p: FooterInput) => JSX.Element;
+export {};
