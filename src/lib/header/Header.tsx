@@ -3,6 +3,7 @@ import {HeaderParams} from "../../types";
 
 export const Header = (p: HeaderParams) => {
     const [title, setTitle] = useState(p.title);
+
     useEffect(() => {
         setTitle(p.title);
     }, [p.title]);
@@ -15,7 +16,7 @@ export const Header = (p: HeaderParams) => {
                 color: "#fff",
                 display: "flex",
                 fill: "#fff",
-                height: "56px",
+                height: `${p.height}px`,
                 justifyContent: "space-between",
                 padding: "0 10px"
             }}>

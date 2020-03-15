@@ -7,6 +7,10 @@ import ChatBotContainer from "./containers/ChatBotContainer";
 import { FooterInput } from "./footer/FooterInput";
 
 export const ChatWindow = (p: {
+
+  onBlur? : () => void;
+
+  headerHeight? : number;
   /** array of entries to build bubbles from */
   content: ChatEntry[];
   /** title for the header, if using default header */
@@ -18,6 +22,8 @@ export const ChatWindow = (p: {
   /** header to replace default */
   header?: JSX.Element;
   /** buble rendering function - for custom bubbles */
+  onFocus?: (e:any) => void;
+
   bubble?: (p: ChatBubbleParams) => JSX.Element;
   /** footer to replace default */
   footer?: JSX.Element;
@@ -25,15 +31,18 @@ export const ChatWindow = (p: {
   headerAdditionalContent?: JSX.Element;
   /** additional params to pass to bubbles */
   bubbleExtraParams?: any;
+
 }) => {
   const CustomBubble = p.bubble;
   const [content, setContent] = useState(p.content);
-  useEffect(() => setContent(p.content), [p.content]);
-  const [title, setTitle] = useState(p.title);
-  useEffect(() => setTitle(p.title), [p.title]);
   const [bubbles, setBubbles] = useState<ReactNode[]>([]);
+  const [title, setTitle] = useState(p.title);
+
+  useEffect(() => setContent(p.content), [p.content]);
+  useEffect(() => setTitle(p.title), [p.title]);
   useEffect(() => {
     const newBubbles = [] as JSX.Element[];
+
     content.forEach((c, i) => {
       const bubble = CustomBubble ? (
         <CustomBubble
@@ -48,7 +57,9 @@ export const ChatWindow = (p: {
       );
       newBubbles.push(bubble);
     });
+
     setBubbles(newBubbles);
+
   }, [content]);
 
   return (
@@ -56,7 +67,7 @@ export const ChatWindow = (p: {
       {p.header ? (
         p.header
       ) : (
-        <Header title={title || ""} extraContent={p.headerAdditionalContent} />
+        <Header title={title || ""} extraContent={p.headerAdditionalContent} height={p.headerHeight || 56} />
       )}
       <ChatBody>{bubbles}</ChatBody>
       {p.footer ? (
@@ -66,7 +77,9 @@ export const ChatWindow = (p: {
           {...{
             onChange: p.onChange ? p.onChange : (t: string) => {},
             onSubmit: p.onSubmit ? p.onSubmit : (t: string) => {},
-            inputPlaceholder: "Type here"
+            onFocus : p.onFocus ? p.onFocus :   undefined,
+            onBlur : p.onBlur ? p.onBlur :   undefined,
+            inputPlaceholder: "Type here ..."
           }}
         />
       )}

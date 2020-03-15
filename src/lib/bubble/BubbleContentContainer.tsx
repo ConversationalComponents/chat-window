@@ -33,6 +33,7 @@ export const BubbleContentContainer = (p: {
                     overflow: "hidden",
                     position: "relative",
                     paddingTop: "4px",
+                    wordBreak:"break-word",
                     paddingLeft: "7px",
                     paddingRight: "7px",
                     paddingBottom: "4px",

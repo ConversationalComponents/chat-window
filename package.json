@@ -41,7 +41,7 @@
     },
     "dependencies": {
         "mobx": "^5.15.4",
-        "react-autosize-textarea": "^7.0.0"
+        "react-device-detect": "^1.11.14"
     },
     "directories": {
         "lib": "lib"

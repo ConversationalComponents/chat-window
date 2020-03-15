@@ -28,24 +28,30 @@ export const ActionButton = (p: {
             return false;
         };
     }, [ref.current]);
+    
     return (
         <button
             ref={ref}
             onPointerDown={onTouchStart}
             onPointerOut={onTouchCancel}
             onPointerUp={onTouchEnd}
+            type="submit"
             style={{
                 pointerEvents: disabled ? "none" : "all",
                 backgroundColor: "transparent",
-                border: 0,
+                border: "none",
                 borderBottomRightRadius: "10px",
                 boxShadow: "none",
                 cursor: `${disabled ? "default" : "pointer"}`,
                 fill: `${invalid ? "#E53935" : color ? color : "#4a4a4a"}`,
                 opacity: `${disabled && !invalid ? ".5" : "1"}`,
                 outline: "none",
-                padding: "14px 16px 12px 16px",
+                display:"flex",
+                alignItems:"center",
                 background: "white",
+                height:"100%",
+                width:"50px",
+                justifyContent:"center",
                 right: 0,
                 top: 0,
                 // @ts-ignore

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, ReactNode } from "react";
 
-export const ChatBody = (p: { children?: ReactNode }) => {
+export const ChatBody = (p: { children?: ReactNode}) => {
   const container = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     container &&
       container.current &&
@@ -9,15 +10,20 @@ export const ChatBody = (p: { children?: ReactNode }) => {
         top: container.current.scrollHeight,
         behavior: "smooth"
       });
-  }, [p.children]);
+  });
 
   return (
     <div
       ref={container}
       style={{
         flex: 1,
-        overflowY: "auto"
+        overflowY: "auto",
+        scrollbarWidth:"thin",
+        position:"relative",
+        height:`auto`,
+        paddingTop : "12px"
       }}
+      id="coco_chat_window_body"
     >
       {p.children}
     </div>

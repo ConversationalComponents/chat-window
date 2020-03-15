@@ -9,6 +9,7 @@ export declare type ChatEntry = {
 export declare type HeaderParams = {
     title: string;
     extraContent?: JSX.Element;
+    height : number | string;
 };
 export declare type ChatBubbleParams = {
     entry: ChatEntry;
