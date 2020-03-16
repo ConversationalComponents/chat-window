@@ -18,7 +18,8 @@ export const Header = (p: HeaderParams) => {
                 fill: "#fff",
                 height: `${p.height}px`,
                 justifyContent: "space-between",
-                padding: "0 10px"
+                padding: "0 10px",
+                transition:"all 0.2s linear"
             }}>
             <h2
                 style={{

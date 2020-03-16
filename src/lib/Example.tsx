@@ -4,6 +4,7 @@ import { ChatWindow } from "./ChatWindow";
 import { useUserTyping } from "./hooks/useUserTyping";
 import { useBotTyping } from "./hooks/useBotTyping";
 import {isMobile} from 'react-device-detect'
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
 const botReplies = [
   "Wow!",
@@ -31,7 +32,8 @@ export const Example = () => {
   const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState("");
   const [headerHeight,setHeaderHeight] = useState<number>(56);
   const [height,setHeight] = useState(window.innerHeight);
-  const [windowHeight,setWindowHeight] = useState<number>()
+  const [windowHeight,setWindowHeight] = useState<number>();
+
 
   useEffect(() => {
     const lastEntry = content.length && content[content.length - 1];
@@ -46,6 +48,12 @@ export const Example = () => {
   useEffect(() => {
     lastInputValue && setLastUnsubmittedInput("");
   }, [lastInputValue]);
+
+  useEffect(() => {
+    return () => {
+      clearAllBodyScrollLocks()
+    }
+  },[])
 
   useUserTyping(
     content,
@@ -66,20 +74,31 @@ export const Example = () => {
     return window.innerHeight;
   }
 
+  const chatBody = document.getElementById("coco_chat_window_body") as HTMLElement;
+  const textarea = document.getElementById("coco_chat_window_textarea") as HTMLElement;
+
   const onFocus = () => {
     if(isMobile){
+
       setTimeout(() => {
         setHeight(() => getCurrentWindowHeight())
         setHeaderHeight(() => 40);
-      },100)
+        disableBodyScroll(chatBody);
+        disableBodyScroll(textarea);
+      },150)
       
     }
   }
 
   const onBlur = () => {
     if(isMobile){
+
       if(typeof windowHeight === "number") setHeight(windowHeight);
-      setHeaderHeight(56);   
+      enableBodyScroll(chatBody);
+      enableBodyScroll(textarea)
+      setTimeout(() => {
+        setHeaderHeight(() => 56);   
+      },350)
     } 
   }
 
@@ -95,14 +114,14 @@ export const Example = () => {
 
 
   return (
-     
+    
         <div
         style={{
           height: `${height}px `,
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          position: isMobile ? "fixed" : "relative",
+          position: isMobile ? "absolute" : "relative",
           left : "0",
           bottom : "0",
           transition : "all 0.3s linear"         
@@ -130,6 +149,6 @@ export const Example = () => {
                 onBlur={onBlur}
            />
            </div>
-        </div>  
+        </div>
   );
 };
