@@ -4,7 +4,7 @@ import React, {useRef, useEffect,useState} from "react";
 type Input = {
     inputInvalid: boolean;
     inputPlaceholder: string;
-    onKeyPress?: (event: any) => void;
+    onKeyPress?: (event: React.KeyboardEvent) => void;
     onChangeHandler: (event: React.ChangeEvent) => void;
     onFocusHandler: (event:React.FocusEvent) => void;
     onBlurHandler: (event:React.FormEvent) => void;
@@ -40,7 +40,6 @@ const Input = (p: Input) => {
         <textarea    
             style={{
                     borderBottomLeftRadius: "10px",
-                    borderBottomRightRadius: "10px",
                     width:"100%",
                     border: "none",
                     boxShadow: "none",
@@ -50,7 +49,7 @@ const Input = (p: Input) => {
                     paddingRight:"55px",
                     height:`${height}px`,
                     maxHeight:`${p.maxHeight || 110}px`,
-                    lineHeight:"18px",
+                    lineHeight:"20px",
                     fontFamily: "sans-serif",
                     scrollbarWidth:"thin",
                     opacity: disabled && !inputInvalid ? 0.5 : 1,
