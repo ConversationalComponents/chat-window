@@ -5,7 +5,7 @@ import {BubbleContentContainer} from "./BubbleContentContainer";
 import Loading from "./loading/Loading";
 import ImageContainer from "./ImageContainer";
 import Image from "./Image";
-import BubbleImageContainer from './BubbleImageContainer';
+import BubbleImageContainer from "./BubbleImageContainer";
 
 export const ChatBubble = (p: ChatBubbleParams) => {
     const avatar = p.entry.avatar;
@@ -15,20 +15,26 @@ export const ChatBubble = (p: ChatBubbleParams) => {
     const [isUser, setIsUser] = useState(p.entry.isUser);
     const [isFirst, setIsFirst] = useState(true);
     const [isLast, setIsLast] = useState(true);
-    const [bubbles,setBubbles] = useState<any>()
+    const [bubbles, setBubbles] = useState<any>();
 
     const ref = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => autorun(() => setIsLoading(!!p.entry.isLoading)), []);
-    useEffect(() => {setId(p.entry.id)}, [p.entry.id]);
-    useEffect(() => {renderBubbles()},[p.entry.message])
-    useEffect(() => {setIsUser(p.entry.isUser)}, [p.entry.isUser]);
+    useEffect(() => {
+        setId(p.entry.id);
+    }, [p.entry.id]);
+    useEffect(() => {
+        renderBubbles();
+    }, [p.entry.message]);
+    useEffect(() => {
+        setIsUser(p.entry.isUser);
+    }, [p.entry.isUser]);
 
     useEffect(() => {
         setIsFirst(true); // this is here for future implementation
         setIsLast(true);
     }, []);
-    
+
     useEffect(
         () =>
             autorun(() => {
@@ -48,39 +54,47 @@ export const ChatBubble = (p: ChatBubbleParams) => {
     );
 
     const renderBubbles = () => {
+        if (isLoading) {
+            const loading = (
+                <BubbleContentContainer id={id} isUser={isUser} isFirst={isFirst} isLast={isLast}>
+                    <Loading />
+                </BubbleContentContainer>
+            );
 
-        if(isLoading) {
-
-            const loading = <BubbleContentContainer id={id} isUser={isUser} isFirst={isFirst} isLast={isLast}>
-                                    <Loading /> 
-                            </BubbleContentContainer>
-
-            setBubbles(loading)
-
+            setBubbles(loading);
         } else {
+            const bubbles = messages.map((msg, i) => {
+                const msgText =
+                    msg.text !== "" ? (
+                        <BubbleContentContainer
+                            id={id}
+                            isUser={isUser}
+                            isFirst={isFirst}
+                            isLast={isLast}
+                            key={`c_${i}`}>
+                            {msg.text}
+                        </BubbleContentContainer>
+                    ) : (
+                        ""
+                    );
 
-             const bubbles =  messages.map((msg,i) => {
+                const msgImage = !!msg.image ? (
+                    <BubbleImageContainer src={msg.image as string} key={`image_${i}`} />
+                ) : (
+                    ""
+                );
 
-                const msgText = msg.text !== "" ?  <BubbleContentContainer id={id} isUser={isUser} isFirst={isFirst} isLast={isLast} key={`c_${i}`} > 
-                                                      {msg.text}
-                                                   </BubbleContentContainer> : "" ;
-
-                const msgImage = msg.image !== "" ? <BubbleImageContainer src={msg.image as string} key={`image_${i}`}/>: "" ;
-    
-               return (
-                   <>
+                return (
+                    <>
                         {msgText}
                         {msgImage}
-                   </>
-               )  
+                    </>
+                );
+            });
 
-              })
-
-              setBubbles(bubbles)
-
-         }  
-         
-    }
+            setBubbles(bubbles);
+        }
+    };
 
     return (
         <div
@@ -90,10 +104,10 @@ export const ChatBubble = (p: ChatBubbleParams) => {
                 display: "flex",
                 justifyContent: `${isUser ? "flex-end" : "flex-start"}`
             }}>
-            <ImageContainer isUser={isUser}>{<Image isUser={isUser} src={avatar} />}</ImageContainer> 
-            <div style={{display:"flex",flexDirection:"column",width:"100%"}}>        
-                {bubbles}
-            </div>
+            <ImageContainer isUser={isUser}>
+                <Image isUser={isUser} src={avatar} />
+            </ImageContainer>
+            <div style={{display: "flex", flexDirection: "column", width: "100%"}}>{bubbles}</div>
             {p.endElement}
         </div>
     );
