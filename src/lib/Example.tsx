@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ChatEntry,MessgaeContent } from "../types";
+import { ChatEntry,MessageContent } from "../types";
 import { ChatWindow } from "./ChatWindow";
 import { useUserTyping } from "./hooks/useUserTyping";
 import { useBotTyping } from "./hooks/useBotTyping";
@@ -23,8 +23,8 @@ export const Example = () => {
     }
   ]);
 
-  const [lastInputValue, setLastInputValue] = useState<MessgaeContent[]>();
-  const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState<MessgaeContent[]>();
+  const [lastInputValue, setLastInputValue] = useState<MessageContent[]>();
+  const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState<MessageContent[]>();
   const [headerHeight,setHeaderHeight] = useState<number>(56);
   const [height,setHeight] = useState(window.innerHeight);
   const [windowHeight,setWindowHeight] = useState<number>();
@@ -53,15 +53,15 @@ export const Example = () => {
   useUserTyping(
     content,
     setContent,
-    lastUnsubmittedInput as MessgaeContent[],
-    lastInputValue as MessgaeContent[],
+    lastUnsubmittedInput as MessageContent[],
+    lastInputValue as MessageContent[],
     userAvatar
   );
 
   const isBotDoneTyping = useBotTyping(
     content,
     setContent,
-    lastInputValue as MessgaeContent[],
+    lastInputValue as MessageContent[],
     botAvatar
   );
 

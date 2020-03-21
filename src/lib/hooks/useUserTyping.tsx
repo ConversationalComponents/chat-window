@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {observable} from "mobx";
-import {ChatEntry,MessgaeContent} from "../../types";
+import {ChatEntry,MessageContent} from "../../types";
 import {uuid} from "../utils/uuid";
 
 const defaultAvatar =
@@ -9,8 +9,8 @@ const defaultAvatar =
 export const useUserTyping = (
     content: ChatEntry[],
     setContent: (content: ChatEntry[]) => void,
-    lastUnsubmittedValue: MessgaeContent[],
-    lastInputValue: MessgaeContent[],
+    lastUnsubmittedValue: MessageContent[],
+    lastInputValue: MessageContent[],
     avatarString?: string
 ) => {
     const [userAvatar, setUserAvatar] = useState(avatarString || defaultAvatar);
