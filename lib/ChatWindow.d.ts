@@ -1,7 +1,7 @@
-/// <reference types="react" />
+import React from "react";
 import { ChatEntry, ChatBubbleParams } from "../types";
 export declare const ChatWindow: (p: {
-    onBlur?: (() => void) | undefined;
+    onBlur?: ((e: React.FormEvent<Element>) => void) | undefined;
     headerHeight?: number | undefined;
     content: ChatEntry[];
     title?: string | undefined;

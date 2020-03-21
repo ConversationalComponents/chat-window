@@ -1,21 +1,15 @@
-import React, { useState, useEffect,useRef } from "react";
-import { ChatEntry } from "../types";
+import React, { useState, useEffect } from "react";
+import { ChatEntry,MessageContent } from "../types";
 import { ChatWindow } from "./ChatWindow";
 import { useUserTyping } from "./hooks/useUserTyping";
 import { useBotTyping } from "./hooks/useBotTyping";
 import {isMobile} from 'react-device-detect'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
-const botReplies = [
-  "Wow!",
-  "Fascinating, please do go on",
-  "Amazing!",
-  "Really?",
-  "If you say so..."
-];
+const botReplies = [[{text:"Hello",image:"https://media.giphy.com/media/Pm45yRYElIcyA/giphy.gif"},{text:"Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot",image:""},{text:"How are you?",image:""}],[{text:"Hello",image:""},{text:"hi",image:"https://media.giphy.com/media/duzpaTbCUy9Vu/giphy.gif"}]];
 
-const getBotReply = () =>
-  botReplies[Math.floor(Math.random() * botReplies.length)];
+const getBotReply = () => botReplies[Math.floor(Math.random() * botReplies.length)];
+
 const userAvatar = "https://img.icons8.com/color/search/0";
 const botAvatar = "https://img.icons8.com/color/search/1";
 
@@ -23,13 +17,14 @@ export const Example = () => {
   const [content, setContent] = useState<ChatEntry[]>([
     {
       isUser: false,
-      message: "welcome to demo",
+      message: [{text:"Welcome",image:""}],
       avatar: botAvatar,
       id: "intro message"
     }
   ]);
-  const [lastInputValue, setLastInputValue] = useState("");
-  const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState("");
+
+  const [lastInputValue, setLastInputValue] = useState<MessageContent[]>();
+  const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState<MessageContent[]>();
   const [headerHeight,setHeaderHeight] = useState<number>(56);
   const [height,setHeight] = useState(window.innerHeight);
   const [windowHeight,setWindowHeight] = useState<number>();
@@ -38,7 +33,7 @@ export const Example = () => {
   useEffect(() => {
     const lastEntry = content.length && content[content.length - 1];
     if (!lastEntry || lastEntry.isUser) return;
-    setLastInputValue("");
+    setLastInputValue(undefined);
   }, [content]);
 
   useEffect(() => {
@@ -46,7 +41,7 @@ export const Example = () => {
   },[])
 
   useEffect(() => {
-    lastInputValue && setLastUnsubmittedInput("");
+   lastInputValue !== undefined  && setLastUnsubmittedInput(undefined);
   }, [lastInputValue]);
 
   useEffect(() => {
@@ -58,15 +53,15 @@ export const Example = () => {
   useUserTyping(
     content,
     setContent,
-    lastUnsubmittedInput,
-    lastInputValue,
+    lastUnsubmittedInput as MessageContent[],
+    lastInputValue as MessageContent[],
     userAvatar
   );
 
   const isBotDoneTyping = useBotTyping(
     content,
     setContent,
-    lastInputValue,
+    lastInputValue as MessageContent[],
     botAvatar
   );
 
@@ -79,7 +74,6 @@ export const Example = () => {
 
   const onFocus = () => {
     if(isMobile){
-
       setTimeout(() => {
         setHeight(() => getCurrentWindowHeight())
         setHeaderHeight(() => 40);
@@ -90,9 +84,9 @@ export const Example = () => {
     }
   }
 
-  const onBlur = () => {
+  const onBlur = (e:React.FormEvent) => {
+    e.preventDefault()
     if(isMobile){
-
       if(typeof windowHeight === "number") setHeight(windowHeight);
       enableBodyScroll(chatBody);
       enableBodyScroll(textarea)
@@ -109,15 +103,29 @@ export const Example = () => {
     if (!lastEntry || lastEntry.isUser) return;
       lastEntry.message = getBotReply();
       lastEntry.isLoading = false;
-
   }, [isBotDoneTyping]);
+
+  const onSubmit = (text:string) => {
+    if(text && !text.match(/^\s*$/)){
+      setLastInputValue([{text,image:""}])
+    } else {
+      setLastInputValue(undefined)
+      setLastUnsubmittedInput(undefined)
+    }
+  }
+
+  const onChange = (text:string) => {
+    if (text){
+      setLastUnsubmittedInput([{text : text,image:""}])
+    } else setLastUnsubmittedInput(undefined)
+  }
 
 
   return (
     
         <div
         style={{
-          height: `${height}px `,
+          height: `${height}px`,
           width: "100%",
           display: "flex",
           justifyContent: "center",
@@ -143,8 +151,8 @@ export const Example = () => {
                 }
                 headerHeight={headerHeight}
                 content={content}
-                onChange={(text: string) => setLastUnsubmittedInput(text)}
-                onSubmit={(text: string) => setLastInputValue(text)}
+                onChange={onChange}
+                onSubmit={onSubmit}
                 onFocus={onFocus}
                 onBlur={onBlur}
            />

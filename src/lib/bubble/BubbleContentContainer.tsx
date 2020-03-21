@@ -23,7 +23,8 @@ export const BubbleContentContainer = (p: {
     return (
         <>
             <style>{css}</style>
-            <div
+            <div style={{width:"100%",display:"flex", justifyContent:p.isUser ? "flex-end" : "flex-start"}}>
+              <div
                 className="bubbleAnimation"
                 style={{
                     boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.15)",
@@ -58,6 +59,7 @@ export const BubbleContentContainer = (p: {
                     color: `${p.isUser ? "#4a4a4a" : "#fff"}`
                 }}>
                 {p.children}
+              </div>
             </div>
         </>
     );

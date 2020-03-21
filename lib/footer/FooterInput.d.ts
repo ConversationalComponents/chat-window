@@ -3,7 +3,7 @@ declare type FooterInput = {
     onSubmit: (value: string) => void;
     onChange?: (value: string) => void;
     onFocus?: (e: React.FocusEvent) => void;
-    onBlur?: () => void;
+    onBlur?: (e: React.FormEvent) => void;
     invalidate?: (value: string) => boolean;
     inputPlaceholder: string;
     disabled?: boolean;

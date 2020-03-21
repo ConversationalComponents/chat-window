@@ -8,7 +8,7 @@ import { FooterInput } from "./footer/FooterInput";
 
 export const ChatWindow = (p: {
 
-  onBlur? : () => void;
+  onBlur? : (e:React.FormEvent) => void;
 
   headerHeight? : number;
   /** array of entries to build bubbles from */
@@ -40,11 +40,12 @@ export const ChatWindow = (p: {
 
   useEffect(() => setContent(p.content), [p.content]);
   useEffect(() => setTitle(p.title), [p.title]);
+
   useEffect(() => {
     const newBubbles = [] as JSX.Element[];
 
     content.forEach((c, i) => {
-      const bubble = CustomBubble ? (
+      const bubbles = CustomBubble ? (
         <CustomBubble
           {...{ entry: c, bubbleExtraParams: p.bubbleExtraParams }}
           key={c.id}
@@ -55,7 +56,7 @@ export const ChatWindow = (p: {
           key={c.id}
         />
       );
-      newBubbles.push(bubble);
+      newBubbles.push(bubbles);
     });
 
     setBubbles(newBubbles);

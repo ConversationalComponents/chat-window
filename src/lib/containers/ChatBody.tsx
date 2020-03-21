@@ -10,7 +10,7 @@ export const ChatBody = (p: { children?: ReactNode}) => {
         top: container.current.scrollHeight,
         behavior: "smooth"
       });
-  });
+  },[p.children]);
 
   return (
     <div

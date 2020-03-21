@@ -1,10 +1,14 @@
 /// <reference types="react" />
 export declare type ChatEntry = {
     isUser: boolean;
-    message: string;
+    message: MessageContent[] | string;
     avatar: string;
     id: string;
     isLoading?: boolean;
+};
+export declare type MessageContent = {
+    text: string;
+    image?: string | File;
 };
 export declare type HeaderParams = {
     title: string;

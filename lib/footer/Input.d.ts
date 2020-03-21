@@ -2,7 +2,7 @@ import React from "react";
 declare type Input = {
     inputInvalid: boolean;
     inputPlaceholder: string;
-    onKeyPress?: (event: any) => void;
+    onKeyPress?: (event: React.KeyboardEvent) => void;
     onChangeHandler: (event: React.ChangeEvent) => void;
     onFocusHandler: (event: React.FocusEvent) => void;
     onBlurHandler: (event: React.FormEvent) => void;
