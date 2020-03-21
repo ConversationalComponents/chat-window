@@ -6,11 +6,12 @@ import Loading from "./loading/Loading";
 import ImageContainer from "./ImageContainer";
 import Image from "./Image";
 import BubbleImageContainer from "./BubbleImageContainer";
+import {getAsMessageContent} from "../utils/getAsMessageContent";
 
 export const ChatBubble = (p: ChatBubbleParams) => {
     const avatar = p.entry.avatar;
     const [id, setId] = useState(p.entry.id);
-    const [messages, setMessage] = useState(p.entry.message);
+    const [messages, setMessage] = useState(getAsMessageContent(p.entry.message));
     const [isLoading, setIsLoading] = useState(!!p.entry.isLoading);
     const [isUser, setIsUser] = useState(p.entry.isUser);
     const [isFirst, setIsFirst] = useState(true);
@@ -38,7 +39,7 @@ export const ChatBubble = (p: ChatBubbleParams) => {
     useEffect(
         () =>
             autorun(() => {
-                setMessage(p.entry.message);
+                setMessage(getAsMessageContent(p.entry.message));
                 const r = ref.current && ref.current.parentElement ? ref.current.parentElement : undefined;
                 r &&
                     setTimeout(
