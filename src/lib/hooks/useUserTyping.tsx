@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {observable} from "mobx";
-import {ChatEntry} from "../../types";
+import {ChatEntry,MessgaeContent} from "../../types";
 import {uuid} from "../utils/uuid";
 
 const defaultAvatar =
@@ -9,16 +9,16 @@ const defaultAvatar =
 export const useUserTyping = (
     content: ChatEntry[],
     setContent: (content: ChatEntry[]) => void,
-    lastUnsubmittedValue: string,
-    lastInputValue: string,
+    lastUnsubmittedValue: MessgaeContent[],
+    lastInputValue: MessgaeContent[],
     avatarString?: string
 ) => {
     const [userAvatar, setUserAvatar] = useState(avatarString || defaultAvatar);
     useEffect(() => setUserAvatar(avatarString || defaultAvatar), [avatarString]);
     useEffect(() => {
-        const lastEntry = content.length ? content[content.length - 1] : undefined;
+        const lastEntry = content.length > 0 ? content[content.length - 1] : undefined;
         if (!lastInputValue) {
-            if (lastUnsubmittedValue && (!lastEntry || !lastEntry.isUser || !lastEntry.isLoading)) {
+            if (lastUnsubmittedValue  && (!lastEntry || !lastEntry.isUser || !lastEntry.isLoading)) {
                 const newContent = [
                     ...content,
                     observable({
@@ -29,8 +29,11 @@ export const useUserTyping = (
                         id: uuid()
                     })
                 ];
-                setContent(newContent);
-            } else if (!lastUnsubmittedValue && lastEntry && lastEntry.isUser && lastEntry.isLoading) {
+                        setContent(newContent);
+                    
+
+            } 
+            else if (!lastUnsubmittedValue && lastEntry && lastEntry.isUser && lastEntry.isLoading) {
                 content.pop();
                 setContent([...content]);
             }

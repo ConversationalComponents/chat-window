@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useState, useEffect} from "react";
 import Input from "./Input";
 import {ConfirmTextButton} from "./ConfirmTextButton";
 
@@ -6,7 +6,7 @@ type FooterInput = {
     onSubmit: (value: string) => void;
     onChange?: (value: string) => void;
     onFocus?: (e:React.FocusEvent) => void;
-    onBlur?: () => void;
+    onBlur?: (e:React.FormEvent) => void;
     invalidate?: (value: string) => boolean;
     inputPlaceholder: string;
     disabled?: boolean;
@@ -61,9 +61,9 @@ export const FooterInput = (p: FooterInput) => {
     }
 
     // onBlur handler
-    const onBlurHandler = () => {
+    const onBlurHandler = (e:React.FormEvent) => {
 
-        return p.onBlur ? p.onBlur() : ""
+        return p.onBlur ? p.onBlur(e) : ""
 
     }
 
