@@ -16,7 +16,7 @@ export const ChatBubble = (p: ChatBubbleParams) => {
     const [isUser, setIsUser] = useState(p.entry.isUser);
     const [isFirst, setIsFirst] = useState(true);
     const [isLast, setIsLast] = useState(true);
-    const [bubbles, setBubbles] = useState<any>();
+    const [bubbles, setBubbles] = useState<JSX.Element[]>();
 
     const ref = useRef<HTMLDivElement | null>(null);
 
@@ -62,7 +62,7 @@ export const ChatBubble = (p: ChatBubbleParams) => {
                 </BubbleContentContainer>
             );
 
-            setBubbles(loading);
+            setBubbles([loading]);
         } else {
             const bubbles = messages.map((msg, i) => {
                 const msgText =
@@ -108,8 +108,14 @@ export const ChatBubble = (p: ChatBubbleParams) => {
             <ImageContainer isUser={isUser}>
                 <Image isUser={isUser} src={avatar} />
             </ImageContainer>
-            <div style={{display: "flex", flexDirection: "column", width: "100%"}}>{bubbles}</div>
-            {p.endElement}
+            <div style={{display: "flex", width: "100%"}}>
+                <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
+                    {bubbles?.map((b, i) => (
+                        <div key={i}>{b}</div>
+                    ))}
+                </div>
+                {p.endElement}
+            </div>
         </div>
     );
 };
