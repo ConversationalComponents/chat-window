@@ -6,7 +6,7 @@ import { useBotTyping } from "./hooks/useBotTyping";
 import {isMobile} from 'react-device-detect'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
-const botReplies = [[{text:"Hello",image:"https://media.giphy.com/media/Pm45yRYElIcyA/giphy.gif"},{text:"Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot",image:""},{text:"How are you?",image:""}],[{text:"Hello",image:""},{text:"hi",image:"https://media.giphy.com/media/duzpaTbCUy9Vu/giphy.gif"}]];
+const botReplies = [[{text:"Hello",image:"https://media.giphy.com/media/Pm45yRYElIcyA/giphy.gif"},{text:"Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot",image:""},{text:"How are you?",image:""}],[{text:"Hello",image:""},{text:"hi",image:"https://media.giphy.com/media/duzpaTbCUy9Vu/giphy.gif"}] , "This is a string"];
 
 const getBotReply = () => botReplies[Math.floor(Math.random() * botReplies.length)];
 
@@ -23,12 +23,11 @@ export const Example = () => {
     }
   ]);
 
-  const [lastInputValue, setLastInputValue] = useState<MessageContent[]>();
-  const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState<MessageContent[]>();
+  const [lastInputValue, setLastInputValue] = useState<MessageContent[] | string>();
+  const [lastUnsubmittedInput, setLastUnsubmittedInput] = useState<MessageContent[] | string>();
   const [headerHeight,setHeaderHeight] = useState<number>(56);
   const [height,setHeight] = useState(window.innerHeight);
   const [windowHeight,setWindowHeight] = useState<number>();
-
 
   useEffect(() => {
     const lastEntry = content.length && content[content.length - 1];
@@ -53,15 +52,15 @@ export const Example = () => {
   useUserTyping(
     content,
     setContent,
-    lastUnsubmittedInput as MessageContent[],
-    lastInputValue as MessageContent[],
+    lastUnsubmittedInput as MessageContent[] | string,
+    lastInputValue as MessageContent[] | string,
     userAvatar
   );
 
   const isBotDoneTyping = useBotTyping(
     content,
     setContent,
-    lastInputValue as MessageContent[],
+    lastInputValue as MessageContent[] | string,
     botAvatar
   );
 
@@ -119,7 +118,6 @@ export const Example = () => {
       setLastUnsubmittedInput([{text : text,image:""}])
     } else setLastUnsubmittedInput(undefined)
   }
-
 
   return (
     
