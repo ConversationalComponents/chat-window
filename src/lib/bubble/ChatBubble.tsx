@@ -63,7 +63,6 @@ export const ChatBubble = (p: ChatBubbleParams) => {
             );
 
             setBubbles([loading]);
-            
         } else {
             const bubbles = messages.map((msg, i) => {
                 const msgText =
@@ -88,10 +87,8 @@ export const ChatBubble = (p: ChatBubbleParams) => {
 
                 return (
                     <>
-                 
                         {msgText}
                         {msgImage}
-
                     </>
                 );
             });
@@ -111,8 +108,14 @@ export const ChatBubble = (p: ChatBubbleParams) => {
             <ImageContainer isUser={isUser}>
                 <Image isUser={isUser} src={avatar} />
             </ImageContainer>
-            <div style={{display:"flex",flexDirection:"column",alignItems:isUser ? "end" : "start",maxWidth:"calc( 100% - 104px )"}}>
-                {bubbles}
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: isUser ? "end" : "start",
+                    maxWidth: "calc( 100% - 104px )"
+                }}>
+                {bubbles && bubbles.map((b, i) => <div key={`bubble_inner_${i}`}>{b}</div>)}
             </div>
             {p.endElement}
         </div>
