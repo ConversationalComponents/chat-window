@@ -116,6 +116,7 @@ export const ChatBubble = (p: ChatBubbleParams) => {
                     maxWidth: "calc( 100% - 104px )"
                 }}>
                 {bubbles && bubbles.map((b, i) => <div key={`bubble_inner_${i}`}>{b}</div>)}
+
             </div>
             {p.endElement}
         </div>
