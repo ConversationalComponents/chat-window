@@ -1,4 +1,5 @@
 import React, {useRef, useEffect,useState} from "react";
+import {isMobile} from 'react-device-detect'
 
 // @ts-ignore
 type Input = {
@@ -31,7 +32,11 @@ const Input = (p: Input) => {
 
         if(value === ""){
 
-            setHeight(p.minHeight || 56)
+            setHeight(p.minHeight || 56);
+            
+            if(!isMobile){
+                textAreaRef.current.focus()
+           }
         }
 
     },[value])
