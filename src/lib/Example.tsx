@@ -6,7 +6,7 @@ import { useBotTyping } from "./hooks/useBotTyping";
 import {isMobile} from 'react-device-detect'
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
-const botReplies = [[{text:"Hello",image:"https://media.giphy.com/media/Pm45yRYElIcyA/giphy.gif"},{text:"Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot",image:""},{text:"How are you?",image:""}],[{text:"Hello",image:""},{text:"hi",image:"https://media.giphy.com/media/duzpaTbCUy9Vu/giphy.gif"}] , "This is a string"];
+const botReplies = [[{text:"Hello",image:"https://media.giphy.com/media/Fn7q3cMgPZmqk/giphy.gif"},{text:"Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot Hi my name is tobi im a human chat bot",image:""},{text:"How are you?",image:""}],[{text:"Hello",image:""},{text:"hi",image:"https://media.giphy.com/media/duzpaTbCUy9Vu/giphy.gif"}] , "This is a string"];
 
 const getBotReply = () => botReplies[Math.floor(Math.random() * botReplies.length)];
 
