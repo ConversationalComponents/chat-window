@@ -48,7 +48,7 @@ export const ChatBubble = (p: ChatBubbleParams) => {
                                 top: r.scrollHeight,
                                 behavior: "smooth"
                             }),
-                        200 // this is a hack to bypass animation delay. Without it, container doesn't scroll all the way when changing bot response from loading to message
+                        1000 // this is a hack to bypass animation delay. Without it, container doesn't scroll all the way when changing bot response from loading to message
                     );
             }),
         []
@@ -108,14 +108,17 @@ export const ChatBubble = (p: ChatBubbleParams) => {
             <ImageContainer isUser={isUser}>
                 <Image isUser={isUser} src={avatar} />
             </ImageContainer>
-            <div style={{display: "flex", width: "100%"}}>
-                <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
-                    {bubbles?.map((b, i) => (
-                        <div key={i}>{b}</div>
-                    ))}
-                </div>
-                {p.endElement}
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: isUser ? "end" : "start",
+                    maxWidth: "calc( 100% - 104px )"
+                }}>
+                {bubbles && bubbles.map((b, i) => <div key={`bubble_inner_${i}`}>{b}</div>)}
+
             </div>
+            {p.endElement}
         </div>
     );
 };

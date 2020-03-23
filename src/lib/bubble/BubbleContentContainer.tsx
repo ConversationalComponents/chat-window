@@ -23,18 +23,15 @@ export const BubbleContentContainer = (p: {
     return (
         <>
             <style>{css}</style>
-            <div style={{width:"100%",display:"flex", justifyContent:p.isUser ? "flex-end" : "flex-start"}}>
               <div
                 className="bubbleAnimation"
                 style={{
                     boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.15)",
-                    display: "inline-block",
                     fontSize: "14px",
-                    maxWidth: "calc(100% - 104px)",
-                    overflow: "hidden",
                     position: "relative",
                     paddingTop: "4px",
                     wordBreak:"break-word",
+                    maxWidth:"100%",
                     paddingLeft: "7px",
                     paddingRight: "7px",
                     paddingBottom: "4px",
@@ -60,7 +57,6 @@ export const BubbleContentContainer = (p: {
                 }}>
                 {p.children}
               </div>
-            </div>
         </>
     );
 };
