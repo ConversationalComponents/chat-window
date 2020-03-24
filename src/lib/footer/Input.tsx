@@ -40,13 +40,17 @@ const Input = (p: Input) => {
 
 
     const onBlurHandler = (e:React.FormEvent) => {
-        
-        if(!isMobile){
-            textAreaRef.current.focus()
-       }
 
        return p.onBlurHandler ? p.onBlurHandler(e) : ""
     }
+
+    useEffect(() => {
+        if(disabled === false && !isMobile){
+         
+              textAreaRef.current.focus()
+         
+        }
+      },[disabled])
 
     return (
         <textarea    
