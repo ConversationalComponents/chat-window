@@ -20,7 +20,7 @@ type Input = {
 
 const Input = (p: Input) => {
 
-    const {inputInvalid, inputPlaceholder,onKeyPress, onChangeHandler, disabled, value,onFocusHandler,onBlurHandler} = p;
+    const {inputInvalid, inputPlaceholder,onKeyPress, onChangeHandler, disabled, value,onFocusHandler} = p;
 
     const textAreaRef = useRef<any>()
     const [height, setHeight] = useState(p.minHeight || 56);
@@ -34,12 +34,19 @@ const Input = (p: Input) => {
 
             setHeight(p.minHeight || 56);
             
-            if(!isMobile){
-                textAreaRef.current.focus()
-           }
         }
 
     },[value])
+
+
+    const onBlurHandler = (e:React.FormEvent) => {
+        
+        if(!isMobile){
+            textAreaRef.current.focus()
+       }
+
+       return p.onBlurHandler ? p.onBlurHandler(e) : ""
+    }
 
     return (
         <textarea    
