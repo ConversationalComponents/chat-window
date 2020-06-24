@@ -18,13 +18,13 @@ export const Header = (p: HeaderParams) => {
                 fill: "#fff",
                 height: `${p.height}px`,
                 justifyContent: "space-between",
-                padding: "0 10px",
-                transition:"all 0.2s linear"
+                padding: "0 10px !important",
+                transition: "all 0.2s linear",
             }}>
             <h2
                 style={{
                     margin: 0,
-                    fontSize: "17px"
+                    fontSize: "17px",
                 }}>
                 {title}
             </h2>

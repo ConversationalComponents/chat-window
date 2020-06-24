@@ -21,11 +21,11 @@ const Image = (p: {isUser: boolean; src: string}) => {
                     boxShadow: "rgba(0, 0, 0, 0.15) 0px 1px 2px 0px",
                     height: "40px",
                     minWidth: "40px",
-                    padding: "3px",
+                    padding: "3px !important",
                     width: "40px",
                     transform: "scale(0)",
                     borderRadius: `${p.isUser ? "50% 50% 50% 0" : "50% 50% 0 50%"}`,
-                    transformOrigin: `${p.isUser ? "bottom left" : "bottom right"}`
+                    transformOrigin: `${p.isUser ? "bottom left" : "bottom right"}`,
                 }}
                 className="imageAnimation"
                 alt="avatar"

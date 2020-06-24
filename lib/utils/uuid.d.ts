@@ -1,1 +1,0 @@
-export function uuid(): any;

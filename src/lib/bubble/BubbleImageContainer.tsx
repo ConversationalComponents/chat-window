@@ -1,13 +1,17 @@
-import React from 'react'
+import React from "react";
 
 type BubbleiImage = {
-    src:string
-}
+    src: string;
+};
 
-const BubbleImageContainer = (p:BubbleiImage) => {
+const BubbleImageContainer = (p: BubbleiImage) => {
     return (
-        <img src={`${p.src}`} style={{maxHeight:"300px",maxWidth:"100%", marginBottom:"10px"}} alt="GIF NOT LOADING"/> 
-    )
-}
+        <img
+            src={`${p.src}`}
+            style={{maxHeight: "300px", maxWidth: "100%", marginBottom: "10px !important"}}
+            alt="GIF NOT LOADING"
+        />
+    );
+};
 
-export default BubbleImageContainer
+export default BubbleImageContainer;

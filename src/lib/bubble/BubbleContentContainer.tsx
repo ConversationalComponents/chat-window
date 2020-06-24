@@ -23,23 +23,26 @@ export const BubbleContentContainer = (p: {
     return (
         <>
             <style>{css}</style>
-              <div
+            <div
                 className="bubbleAnimation"
                 style={{
                     boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.15)",
                     fontSize: "14px",
                     position: "relative",
-                    paddingTop: "4px",
-                    wordBreak:"break-word",
-                    maxWidth:"100%",
-                    paddingLeft: "7px",
-                    paddingRight: "7px",
-                    paddingBottom: "4px",
+                    wordBreak: "break-word",
+                    maxWidth: "100%",
+                    padding: "4px 7px 4px 7px !important",
                     backgroundColor: `${p.isUser ? "#fff" : "#01A6E0"}`,
                     transformOrigin: `${
                         p.isFirst ? (p.isUser ? "bottom right" : "bottom left") : p.isUser ? "top right" : "top left"
                     }`,
-                    margin: `${!p.isFirst ? (p.isUser ? "-8px 46px 10px 0" : "-8px 0 10px 46px") : "0 0 10px 0"}`,
+                    margin: `${
+                        !p.isFirst
+                            ? p.isUser
+                                ? "-8px 46px 10px 0 !important"
+                                : "-8px 0 10px 46px !important"
+                            : "0 0 10px 0 !important"
+                    }`,
                     borderRadius: `${
                         !p.isFirst && !p.isLast
                             ? p.isUser
@@ -53,10 +56,10 @@ export const BubbleContentContainer = (p: {
                             ? "18px 18px 0 18px"
                             : "18px 18px 18px 0"
                     }`,
-                    color: `${p.isUser ? "#4a4a4a" : "#fff"}`
+                    color: `${p.isUser ? "#4a4a4a" : "#fff"}`,
                 }}>
                 {p.children}
-              </div>
+            </div>
         </>
     );
 };

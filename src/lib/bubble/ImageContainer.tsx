@@ -6,7 +6,7 @@ const ImageContainer = (p: {children?: ReactNode; isUser: boolean}) => {
             style={{
                 display: "inline-block",
                 order: p.isUser ? 1 : 0,
-                padding: "6px"
+                padding: "6px 6px 0 6px !important",
             }}>
             {p.children}
         </div>
