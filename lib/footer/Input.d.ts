@@ -13,6 +13,7 @@ declare type Input = {
     maxHeight?: number;
     minHeight?: number;
     padding?: string;
+    isRtl?: boolean;
 };
 declare const Input: (p: Input) => JSX.Element;
 export default Input;

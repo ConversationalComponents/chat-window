@@ -12,6 +12,7 @@ declare type FooterInput = {
     maxRows?: number;
     maxHeight?: number;
     minHeight?: number;
+    isRtl?: boolean;
 };
-export declare const FooterInput: (p: FooterInput) => JSX.Element;
+export declare const FooterInput: React.FC<FooterInput>;
 export {};
