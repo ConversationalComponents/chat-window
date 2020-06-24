@@ -170,6 +170,7 @@ export const Example = () => {
                     onFocus={onFocus}
                     onBlur={onBlur}
                     footer={footer}
+                    isRtl={true}
                 />
             </div>
         </div>

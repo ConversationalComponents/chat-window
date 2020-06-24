@@ -13,4 +13,5 @@ export declare const ChatWindow: (p: {
     footer?: JSX.Element | undefined;
     headerAdditionalContent?: JSX.Element | undefined;
     bubbleExtraParams?: any;
+    isRtl?: boolean | undefined;
 }) => JSX.Element;

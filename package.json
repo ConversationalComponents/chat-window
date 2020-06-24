@@ -1,6 +1,6 @@
 {
     "name": "@conversationalcomponents/chat-window",
-    "version": "1.5.8",
+    "version": "1.5.10",
     "description": "Customisable chat window component with React and Mobx",
     "keywords": [
         "React",

@@ -16,6 +16,7 @@ export declare type HeaderParams = {
     height: number | string;
 };
 export declare type ChatBubbleParams = {
+    isRtl?: boolean;
     entry: ChatEntry;
     endElement?: JSX.Element;
     bubbleExtraParams?: any;

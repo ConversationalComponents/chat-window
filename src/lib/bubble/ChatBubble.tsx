@@ -10,6 +10,7 @@ import {getAsMessageContent} from "../utils/getAsMessageContent";
 
 export const ChatBubble = (p: ChatBubbleParams) => {
     const avatar = p.entry.avatar;
+    const {isRtl} = p;
     const [id, setId] = useState(p.entry.id);
     const [messages, setMessage] = useState(getAsMessageContent(p.entry.message));
     const [isLoading, setIsLoading] = useState(!!p.entry.isLoading);
@@ -46,7 +47,7 @@ export const ChatBubble = (p: ChatBubbleParams) => {
                         () =>
                             r.scrollTo({
                                 top: r.scrollHeight,
-                                behavior: "smooth"
+                                behavior: "smooth",
                             }),
                         1000 // this is a hack to bypass animation delay. Without it, container doesn't scroll all the way when changing bot response from loading to message
                     );
@@ -103,20 +104,20 @@ export const ChatBubble = (p: ChatBubbleParams) => {
             style={{
                 alignItems: "flex-end",
                 display: "flex",
-                justifyContent: `${isUser ? "flex-end" : "flex-start"}`
+                justifyContent: `${isUser ? "flex-end" : "flex-start"}`,
             }}>
             <ImageContainer isUser={isUser}>
                 <Image isUser={isUser} src={avatar} />
             </ImageContainer>
             <div
                 style={{
+                    direction: isRtl ? "rtl" : "ltr",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: isUser ? "end" : "start",
-                    maxWidth: "calc( 100% - 104px )"
+                    maxWidth: "calc( 100% - 104px )",
                 }}>
                 {bubbles && bubbles.map((b, i) => <div key={`bubble_inner_${i}`}>{b}</div>)}
-
             </div>
             {p.endElement}
         </div>

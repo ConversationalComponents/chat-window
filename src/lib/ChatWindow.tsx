@@ -30,9 +30,10 @@ export const ChatWindow = (p: {
     headerAdditionalContent?: JSX.Element;
     /** additional params to pass to bubbles */
     bubbleExtraParams?: any;
+    isRtl?: boolean;
 }) => {
     const CustomBubble = p.bubble;
-    const {content, title, header} = p;
+    const {content, title, header, isRtl} = p;
     const [bubbles, setBubbles] = useState<ReactNode[]>([]);
 
     useEffect(() => {
@@ -40,9 +41,9 @@ export const ChatWindow = (p: {
 
         content.forEach((c, i) => {
             const bubbles = CustomBubble ? (
-                <CustomBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams}} key={c.id} />
+                <CustomBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams, isRtl}} key={c.id} />
             ) : (
-                <ChatBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams}} key={c.id} />
+                <ChatBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams, isRtl}} key={c.id} />
             );
             newBubbles.push(bubbles);
         });
