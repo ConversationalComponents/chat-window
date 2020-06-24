@@ -112,6 +112,7 @@ export const ChatBubble = (p: ChatBubbleParams) => {
             <div
                 style={{
                     direction: isRtl ? "rtl" : "ltr",
+                    textAlign: isRtl ? "right" : "left",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: isUser ? "end" : "start",
