@@ -1,4 +1,5 @@
 import React, {ReactNode} from "react";
+import Linkify from "react-linkify";
 
 const css = `.bubbleAnimation {
     animation: bubble 0.3s ease forwards;
@@ -21,17 +22,22 @@ export const BubbleContentContainer = (p: {
     isLast: boolean;
 }) => {
     return (
-        <>
+        <Linkify
+            componentDecorator={(decoratedHref: string, decoratedText: string, key: number) => (
+                <a href={decoratedHref} key={key} target="_blank">
+                    {decoratedText}
+                </a>
+            )}>
             <style>{css}</style>
-              <div
+            <div
                 className="bubbleAnimation"
                 style={{
                     boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.15)",
                     fontSize: "14px",
                     position: "relative",
                     paddingTop: "4px",
-                    wordBreak:"break-word",
-                    maxWidth:"100%",
+                    wordBreak: "break-word",
+                    maxWidth: "100%",
                     paddingLeft: "7px",
                     paddingRight: "7px",
                     paddingBottom: "4px",
@@ -53,10 +59,10 @@ export const BubbleContentContainer = (p: {
                             ? "18px 18px 0 18px"
                             : "18px 18px 18px 0"
                     }`,
-                    color: `${p.isUser ? "#4a4a4a" : "#fff"}`
+                    color: `${p.isUser ? "#4a4a4a" : "#fff"}`,
                 }}>
                 {p.children}
-              </div>
-        </>
+            </div>
+        </Linkify>
     );
 };

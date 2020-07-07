@@ -1,6 +1,6 @@
 {
     "name": "@conversationalcomponents/chat-window",
-    "version": "1.5.11",
+    "version": "1.5.12",
     "description": "Customisable chat window component with React and Mobx",
     "keywords": [
         "React",
@@ -35,13 +35,15 @@
     },
     "devDependencies": {
         "@types/react": "^16.9.20",
+        "@types/react-linkify": "^1.0.0",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "typescript": "^3.7.5"
     },
     "dependencies": {
         "mobx": "^5.15.4",
-        "react-device-detect": "^1.11.14"
+        "react-device-detect": "^1.11.14",
+        "react-linkify": "^1.0.0-alpha"
     },
     "directories": {
         "lib": "lib"
