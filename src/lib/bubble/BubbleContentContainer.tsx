@@ -24,7 +24,7 @@ export const BubbleContentContainer = (p: {
     return (
         <Linkify
             componentDecorator={(decoratedHref: string, decoratedText: string, key: number) => (
-                <a href={decoratedHref} key={key} target="_blank">
+                <a style={{color: p.isUser ? "black" : "white"}} href={decoratedHref} key={key} target="_blank">
                     {decoratedText}
                 </a>
             )}>
