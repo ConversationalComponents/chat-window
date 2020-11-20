@@ -31,6 +31,8 @@ export const ChatWindow = (p: {
     /** additional params to pass to bubbles */
     bubbleExtraParams?: any;
     isRtl?: boolean;
+    /** custom endElement to pass to chatBubble */
+    endElement?: JSX.Element;
 }) => {
     const CustomBubble = p.bubble;
     const {content, title, header, isRtl} = p;
@@ -41,9 +43,9 @@ export const ChatWindow = (p: {
 
         content.forEach((c, i) => {
             const bubbles = CustomBubble ? (
-                <CustomBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams, isRtl}} key={c.id} />
+                <CustomBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams, endElement: p.endElement, isRtl}} key={c.id} />
             ) : (
-                <ChatBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams, isRtl}} key={c.id} />
+                <ChatBubble {...{entry: c, bubbleExtraParams: p.bubbleExtraParams, endElement: p.endElement, isRtl}} key={c.id} />
             );
             newBubbles.push(bubbles);
         });
